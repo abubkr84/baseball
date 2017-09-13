@@ -1,0 +1,14 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongodb": {
+    "host": "ds133044.mlab.com",
+    "port": 43471,
+    "url": "mongodb://admin:admin@ds133044.mlab.com:33044/baseball",
+    "database": "baseball",
+    "name": "mongodb",
+    "connector": "mongodb"
+  }
+}

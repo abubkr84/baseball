@@ -1,0 +1,79 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <body>
+      <div class="row">
+        <div class="col-md-3 col-md-3 sidebar-offcanvas" id="sidebar"  >
+          <div class="list-group">
+            <a  (click)="createPlan()" class="list-group-item active">Create Your Personal Plan</a>
+           </div>
+       </div>
+        <div class="col-md-6">
+           <div class="well" id="editorContainer">
+          <div *ngIf="showEditor">
+
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-3 col-form-label">Name Your Plan</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="planName.name" style="width: 85%;" name="plan-name"  class="form-control" id="createPlan" required>
+              </div>
+            </div>
+                <div class="card bg-light mb-3" style="max-width: 30rem;">
+                  <div class="card-body">
+                    <h4 class="card-title">Manage Your Plans</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Add or Delete Plan</h6>
+                     <div *ngFor="let data of dataToSave; let i = index;"><a class="badge badge-primary">{{data.title}}</a><button type="button" (click)="removeData(i)"class="btn btn-link">Remove</button></div>
+                  </div>
+                </div>
+
+  <!-- <quill-editor  [maxLength]="5" [minLength]="3" [required]="true"  [modules]="{toolbar: false}" (onContentChanged)="logChange($event);" (onSelectionChanged)="logSelection($event);"></quill-editor> -->
+
+              <!-- <froala [froalaOptions]="froalaOptions" [froalaData]="text" (model)="onFroalaModelChanged($event)" (editorInitialized)="onEditorInitialized()"></froala> -->
+            <!-- <summernote [(ngModel)]="text" [options]="options" ></summernote> -->
+             <a  (click)="savePlan()" class="list-group-item active">Save Plan</a>
+        </div>
+        </div>
+
+         <div *ngIf="showPlanDetails">
+            <div class="list-group" *ngFor="let d of data[0]">
+                <a  class="list-group-item list-group-item-action flex-column align-items-start active">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"></h5>
+                  </div>
+                </a>
+                <a  class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                  </div>
+                  <p class="mb-1">{{d.description}}</p>
+                  <small class="text-muted">Some other Description</small>
+                </a>
+                <b  class="list-group-item list-group-item-action flex-column align-items-start">
+                  <iframe width="460" height="315" class="e2e-iframe-trusted-src" [src]="sanitizer.bypassSecurityTrustResourceUrl(d.videoURL+controls)" frameborder="0" allowfullscreen></iframe>
+                </b>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-md-3 sidebar-offcanvas" id="sidebar"  >
+          <div class="list-group">
+            <a class="list-group-item active">Select Your Plan!</a>
+                <a data-toggle="collapse" href="#dropdown-lvl1">
+                <span class="glyphicon glyphicon-user"></span> All Drills <span class="caret"></span>
+                </a>
+               <div id="dropdown-lvl1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class="nav navbar-nav" *ngFor="let data of testData[0].description;  let i = index" (click)="planClicked(i)">
+                            <li><a class="list-group-item" (click)="addToPlan()">{{data.title}}</a></li>
+                            <!-- Dropdown level 2 -->
+                        </ul>
+                    </div>
+                </div>
+          </div>
+           <!-- <li class="panel panel-default" id="dropdown">
+                <a data-toggle="collapse" href="#dropdown-lvl1">
+                    <span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span>
+                </a>
+                 Dropdown level 1 -->
+       </div>
+     </div>
+    </body>
+  </div>
+</div>
